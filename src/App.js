@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, useEffect, useState } from "react";
+import TodoForm from "./components/NewTodo/TodoForm";
+import TodoList from "./components/TodoList/TodoList";
+import Header from "./components/utilities/Header";
+import Nav from "./components/utilities/Nav";
+import "./styles/App.css";
 
-function App() {
+function App(props) {
+  const [todo, setTodo] = useState("");
+  const [todoList, setTodoList] = useState([]);
+  const [edit, setEdit] = useState(false);
+  const getTodoData = (todoData) => {
+    todoData.id = Math.random().toString();
+    setTodoList((prevTodos) => {
+      if (todoList !== []) {
+        return [...prevTodos, todoData];
+      }
+    });
+
+    // localStorage.setItem("todos", JSON.stringify(todoList));
+  };
+  const getEditData = (editData) => {
+    console.log(todoList);
+    setTodo(editData);
+    setEdit(true);
+  };
+  // useEffect(() => {
+  //   localStorage.getItem("todos");
+  // }, [todoList]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Nav />
+      <Header />
+
+      <TodoForm
+        todo={todo}
+        edit={edit}
+        todoList={todoList}
+        setTodo={setTodo}
+        getTodoData={getTodoData}
+        getEditData={getEditData}
+      />
+
+      <TodoList data={todoList} getEditData={getEditData} />
+    </Fragment>
   );
 }
 
