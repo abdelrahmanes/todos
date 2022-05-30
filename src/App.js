@@ -24,9 +24,9 @@ function App(props) {
     setTodo(editData);
     setEdit(true);
   };
-  // useEffect(() => {
-  //   localStorage.getItem("todos");
-  // }, [todoList]);
+  const deleteAction = (id) => {
+    setTodoList(todoList.filter((item) => item.id !== id));
+  };
 
   return (
     <Fragment>
@@ -42,7 +42,11 @@ function App(props) {
         getEditData={getEditData}
       />
 
-      <TodoList data={todoList} getEditData={getEditData} />
+      <TodoList
+        data={todoList}
+        getEditData={getEditData}
+        delete={deleteAction}
+      />
     </Fragment>
   );
 }

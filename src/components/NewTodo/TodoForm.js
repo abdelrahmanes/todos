@@ -27,7 +27,7 @@ export default function TodoForm(props) {
     <Card position={true}>
       <form action="submit" onSubmit={submitHandler}>
         <div className="flex justify-start items-center gap-3">
-          <label for="todo" className="cursor-pointer">
+          <label htmlFor="todo" className="cursor-pointer">
             <svg
               className="w-8 h-8 text-gray-500"
               viewBox="0 0 32 32"

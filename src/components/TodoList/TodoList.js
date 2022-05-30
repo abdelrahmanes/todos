@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../utilities/Card";
 import TodoItem from "./TodoItem";
 
 export default function TodoList(props) {
+  // useEffect(() => {
+  //   console.log(props.data);
+  // }, [props.data]);
+
   return (
     <div className={`${props.data.length === 0 ? "hidden" : null}`}>
       <div className=" pt-10 w-3/5 m-auto mt-10 ">
@@ -12,8 +16,16 @@ export default function TodoList(props) {
       </div>
       <Card position={false}>
         <ul>
-          {props.data.map((todo) => {
-            return <TodoItem todo={todo} getEditData={props.getEditData} />;
+          {props.data.map((todo, index) => {
+            return (
+              <TodoItem
+                data={props.data}
+                todo={todo}
+                id={todo.id}
+                getEditData={props.getEditData}
+                deleteAction={props.delete}
+              />
+            );
           })}
         </ul>
       </Card>
